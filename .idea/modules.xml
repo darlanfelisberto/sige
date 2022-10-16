@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/sige.iml" filepath="$PROJECT_DIR$/sige.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frontEnd/academico/academico.iml" filepath="$PROJECT_DIR$/frontEnd/academico/academico.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backEnd/sigeAuth/sigeAuth.iml" filepath="$PROJECT_DIR$/backEnd/sigeAuth/sigeAuth.iml" />
     </modules>
   </component>
 </project>
