@@ -14,17 +14,17 @@ import { Component, OnInit } from '@angular/core';
       </nav>
       <div class="main flex-column">
         <section class="main">
-          site
-
+          tete
+          <ng-content></ng-content>
         </section>
       </div>
     </main>
   `,
   styles: [
     `
-      $BGHeader : #da7635;
+      $BGHeader: #da7635;
       $BGnav:#403d39;
-      $BGMain : #fffcf2;
+      $BGMain: #fffcf2;
       .main{
         display: flex;
         height: 100%;
