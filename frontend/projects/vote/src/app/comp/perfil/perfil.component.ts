@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Logger} from "../../../../../template-lib/src/util/Logger";
+
 
 @Component({
   selector: 'app-perfil',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilComponent implements OnInit {
 
-  constructor() { }
+  constructor(private log:Logger) {
+    this.log.info("rese");
+  }
 
   ngOnInit(): void {
   }

@@ -7,6 +7,7 @@ import {TemplateLibComponent} from "../../../template-lib/src/lib/template-lib.c
 import { PerfilComponent } from './comp/perfil/perfil.component';
 import {AuthService} from "../../../template-lib/src/service/auth.service";
 import {AuthGuardService} from "../../../template-lib/src/guards/auth-guard.service";
+import {TemplateLibModule} from "../../../template-lib/src/lib/template-lib.module";
 
 @NgModule({
   declarations: [
@@ -16,8 +17,8 @@ import {AuthGuardService} from "../../../template-lib/src/guards/auth-guard.serv
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-    // ,routing
+    AppRoutingModule,
+    TemplateLibModule
   ],
   providers: [AuthService,AuthGuardService],
   bootstrap: [AppComponent]

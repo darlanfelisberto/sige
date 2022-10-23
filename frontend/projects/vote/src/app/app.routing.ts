@@ -6,7 +6,7 @@ import {CustomRoute} from "../../../template-lib/src/util/CustomRoute";
 
 
 export const APP_ROUTES: CustomRoute[] = [
-  {path:'perfil',component:PerfilComponent,canActivate:[AuthGuardService],perm:['teste','teste']}
+  {path:'perfil',component:PerfilComponent,perm:['teste','teste']}
 ]
 
 // export const routing: ModuleWithProviders<RouterModule> = RouterModule.forRoot(APP_ROUTES);

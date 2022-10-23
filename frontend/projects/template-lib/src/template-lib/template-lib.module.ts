@@ -1,22 +1,18 @@
 import { NgModule } from '@angular/core';
-import { TemplateLibComponent } from './template-lib.component';
+import { CommonModule } from '@angular/common';
 import {Oidc} from "../util/Oidc";
 import {Logger} from "../util/Logger";
 
 
 
 @NgModule({
-  declarations: [
-
-  ],
-  providers:[
+  declarations:[],
+  providers: [
     Oidc,
     Logger
   ],
   imports: [
-  ],
-  exports: [
-
+    CommonModule
   ]
 })
 export class TemplateLibModule { }
