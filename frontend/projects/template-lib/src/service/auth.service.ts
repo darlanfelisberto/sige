@@ -1,10 +1,11 @@
 import {Injectable, OnInit} from '@angular/core';
-import {Oidc} from "../util/Oidc";
+import {OidcService} from "./Oidc.service";
 
 @Injectable()
 export class AuthService implements OnInit{
 
-  constructor(private oidc:Oidc) { }
+  constructor(private oidc:OidcService) {
+  }
 
 
   isAuthenticad():boolean{

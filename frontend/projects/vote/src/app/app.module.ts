@@ -8,6 +8,7 @@ import { PerfilComponent } from './comp/perfil/perfil.component';
 import {AuthService} from "../../../template-lib/src/service/auth.service";
 import {AuthGuardService} from "../../../template-lib/src/guards/auth-guard.service";
 import {TemplateLibModule} from "../../../template-lib/src/lib/template-lib.module";
+import {OidcService} from "../../../template-lib/src/service/Oidc.service";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import {TemplateLibModule} from "../../../template-lib/src/lib/template-lib.modu
     AppRoutingModule,
     TemplateLibModule
   ],
-  providers: [AuthService,AuthGuardService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

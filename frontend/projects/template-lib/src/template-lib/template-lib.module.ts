@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Oidc} from "../util/Oidc";
+import {Oidc} from "../util/OidcService";
 import {Logger} from "../util/Logger";
 
 

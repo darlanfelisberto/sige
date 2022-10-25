@@ -1,19 +1,31 @@
-import {Injectable} from "@angular/core";
-import {Logger} from "./Logger";
+import {Injectable, OnInit} from "@angular/core";
+import {Logger} from "../util/Logger";
 
 @Injectable()
-export class Oidc {
+export class OidcService implements OnInit{
 
-  oidcProvider: string = 'http://localhost:8081/auth';
+  public static OIDC_WELL_KNOWN:string = 'OIDC_WELL_KNOWN';
+
+  oidcProvider: string = 'http://localhost:8081/auth/realms/iffar';
   realm: string = 'sige';
   resource: string = 'client_id';
   secret: string = '3fd70ff4-fe2b-47b6-a8a3-cd1cf281a939';
-  oidcConfiguration:any = undefined;
+  oidcConfiguration:Object = {};
 
   constructor(private log:Logger) {
+    this.loagServerinfo();
+    if(sessionStorage.getItem(OidcService.OIDC_WELL_KNOWN) ){
+      this.log.info('Recuperando '+OidcService.OIDC_WELL_KNOWN);
+      this.oidcConfiguration = JSON.parse(sessionStorage.getItem(OidcService.OIDC_WELL_KNOWN) as string);
+    }
   }
 
-  public loagServerinfo() {
+  ngOnInit(): void {
+    console.log('teste')
+    this.loagServerinfo();
+  }
+
+  loagServerinfo() {
 
     this.log.info('Chamando oidc proviver well-know');
     var oidcProviderConfigUrl;
@@ -26,10 +38,16 @@ export class Oidc {
     req.open('GET', oidcProviderConfigUrl, true);
     req.setRequestHeader('Accept', 'application/json');
 
+    req.onerror =  () =>{
+      this.log.info('erro');
+    }
+
     req.onreadystatechange = () => {
+      this.log.info('respospa');
       if (req.readyState == 4) {
         if (req.status == 200) {
           this.oidcConfiguration = JSON.parse(req.responseText);
+          sessionStorage.setItem(OidcService.OIDC_WELL_KNOWN,req.responseText);
         }
       }
     };

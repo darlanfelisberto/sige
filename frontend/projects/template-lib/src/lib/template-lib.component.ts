@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
     <header class="header"> header</header>
     <main class="main">
       <nav>
+        <a routerLink="/perfil">perfil</a>
         <div> meio</div>
         <footer>
           footer
