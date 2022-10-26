@@ -1,5 +1,7 @@
 package br.com.sige.academico.models;
 
+import br.com.sige.academico.oidc.util.ResponseTypeEnum;
+
 import javax.persistence.*;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,6 +23,10 @@ public class Cliente extends Model {
 
     @Column(name = "cliente_url")
     private String clienteUrl;
+
+    @Column(name = "response_type")
+    @Enumerated(EnumType.STRING)
+    private ResponseTypeEnum responseType;
 
     @Override
     public Integer getId() {
@@ -44,7 +50,9 @@ public class Cliente extends Model {
     }
 
     public URI urlRedirecionamento(String redirect) throws URISyntaxException {
-        return new URI(getRedirecionamento() + redirect.replaceAll(getRedirecionamento(), ""));
+        URI ur = new URI(getRedirecionamento() + redirect.replaceAll(getRedirecionamento(), ""));
+        System.out.println(ur.toString());
+        return ur;
     }
 
     public void setRedirecionamento(String redirecionamento) {
@@ -65,5 +73,13 @@ public class Cliente extends Model {
 
     public void setSecret(String secret) {
         this.secret = secret;
+    }
+
+    public ResponseTypeEnum getResponseType() {
+        return responseType;
+    }
+
+    public void setResponseType(ResponseTypeEnum responseType) {
+        this.responseType = responseType;
     }
 }

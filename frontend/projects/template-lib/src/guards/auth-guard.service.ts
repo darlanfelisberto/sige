@@ -21,7 +21,7 @@ export class AuthGuardService implements CanActivate{
       return true;
     }else{
        console.log((route.routeConfig as CustomRoute).perm);
-       // window.location.href = ""
+       this.autService.encaminhaLogin();
     }
 
     return this.autService.isAuthenticad();

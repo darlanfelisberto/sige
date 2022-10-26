@@ -10,7 +10,7 @@ export class OidcService implements OnInit{
   realm: string = 'sige';
   resource: string = 'client_id';
   secret: string = '3fd70ff4-fe2b-47b6-a8a3-cd1cf281a939';
-  oidcConfiguration:Object = {};
+  oidcConfiguration:any = {};
 
   constructor(private log:Logger) {
     this.loagServerinfo();
@@ -23,6 +23,10 @@ export class OidcService implements OnInit{
   ngOnInit(): void {
     console.log('teste')
     this.loagServerinfo();
+  }
+
+  getAuthUrl():string{
+    return this.oidcConfiguration['authorization_endpoint'];
   }
 
   loagServerinfo() {

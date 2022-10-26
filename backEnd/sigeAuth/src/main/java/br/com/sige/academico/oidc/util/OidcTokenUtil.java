@@ -1,6 +1,7 @@
 package br.com.sige.academico.oidc.util;
 
 import br.com.sige.academico.models.AuthLogin;
+import br.com.sige.academico.oidc.OpenIdConstant;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.RSASSASigner;
 import com.nimbusds.jwt.JWTClaimsSet;
@@ -8,6 +9,11 @@ import com.nimbusds.jwt.SignedJWT;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObjectBuilder;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.Response;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +30,6 @@ public class OidcTokenUtil {
     public static final String ISSUR = "http://localhost:8081/auth/realms/sige";
 
     @Inject OidcKeysUtil oidcKeysUtil;
-
 
     public String createIdToken(AuthLogin authLogin, String nonce) {
         Date now = new Date();
@@ -125,5 +130,57 @@ public class OidcTokenUtil {
         Map<String, Object> roles = new HashMap<>();
         roles.put("roles", authLogin.getUsuario().getArrayPermissoes());
         jstClaimsBuilder.claim("realm_access", roles);
+    }
+
+    public Response.ResponseBuilder createResponse(AuthLogin authLogin, String redirectUri) throws URISyntaxException {
+       return switch (authLogin.getCliente().getResponseType()){
+            case CODE -> this.createCodeResponse(authLogin,redirectUri);
+            case TOKEN -> this.createTokenResponse(authLogin,redirectUri);
+            default -> null;
+        };
+    }
+
+    public Response.ResponseBuilder createCodeResponse(AuthLogin authLogin, String redirectUri) throws URISyntaxException {
+        Response.ResponseBuilder rb = Response.ok();
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+
+        jsonBuilder.add(SESSION_STATE, authLogin.getState().toString());
+        jsonBuilder.add(IDENTITY_TOKEN, this.createIdToken(authLogin,null));
+        jsonBuilder.add(ACCESS_TOKEN, this.createAccessToken(authLogin,null));
+        jsonBuilder.add(TOKEN_TYPE, OpenIdConstant.BEARER_TYPE);
+        jsonBuilder.add(EXPIRES_IN, OidcTokenUtil.expira);
+
+        //https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.3.1.3.3
+        CacheControl cc = new CacheControl();
+        cc.setNoCache(true);
+        cc.setNoStore(true);
+        return rb.location(authLogin.getCliente().urlRedirecionamento(redirectUri))
+                .entity(jsonBuilder.build())
+                .cacheControl(cc);
+    }
+
+    public Response.ResponseBuilder createTokenResponse(AuthLogin authLogin, String redirectUri) throws URISyntaxException {
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+
+        String paramUrl = "?" + SESSION_STATE + "=" + authLogin.getState().toString()
+                + "&" + ACCESS_TOKEN + "=" +this.createAccessToken(authLogin,null)
+                + "&" + TOKEN_TYPE + "=" + OpenIdConstant.BEARER_TYPE
+                + "&" + EXPIRES_IN + "=" + OidcTokenUtil.expira;
+
+        //https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.3.1.3.3
+        CacheControl cc = new CacheControl();
+        cc.setNoCache(true);
+        cc.setNoStore(true);
+        return Response.seeOther(authLogin.getCliente().urlRedirecionamento(redirectUri + paramUrl))
+                .cacheControl(cc);
+    }
+
+    public Response.ResponseBuilder createUrlRedirectCodeResponse(AuthLogin authLogin, String redirectUri) throws URISyntaxException {
+        //https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.3.1.3.3
+        CacheControl cc = new CacheControl();
+        cc.setNoCache(true);
+        cc.setNoStore(true);
+        return Response.seeOther(authLogin.getCliente().urlRedirecionamento(redirectUri + authLogin.queryParam()))
+                .cacheControl(cc);
     }
 }

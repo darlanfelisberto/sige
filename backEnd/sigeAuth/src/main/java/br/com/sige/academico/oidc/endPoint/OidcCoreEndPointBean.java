@@ -6,7 +6,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.TEXT_HTML;
 
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.json.Json;
@@ -23,6 +23,7 @@ import br.com.sige.academico.models.Usuario;
 import br.com.sige.academico.oidc.util.OidcKeysUtil;
 import br.com.sige.academico.oidc.util.OidcTokenUtil;
 import br.com.sige.academico.oidc.OpenIdConstant;
+import br.com.sige.academico.oidc.util.ResponseTypeEnum;
 import io.quarkus.qute.Template;
 import io.vertx.core.http.HttpServerRequest;
 
@@ -73,10 +74,10 @@ public class OidcCoreEndPointBean {
             @QueryParam(RESPONSE_TYPE) String responseType, @QueryParam(NONCE) String nonce,
             @QueryParam(STATE) String state, @QueryParam(REDIRECT_URI) String redirectUri) throws URISyntaxException {
 
-        if (!CODE.equals(responseType)) {
-//            return this.createJsonError("invalid_grant_type");
-            return Response.ok(erroAuth.render(), TEXT_HTML).build();
-        }
+//        if (!CODE.equals(responseType) || !TOKEN.equals(responseType)) {
+////            return this.createJsonError("invalid_grant_type");
+//            return Response.ok(erroAuth.render(), TEXT_HTML).build();
+//        }
 
         if (!OPENID_SCOPE.equals(scope)) {
             return Response.ok(erroAuth.render(), TEXT_HTML).build();
@@ -133,8 +134,14 @@ public class OidcCoreEndPointBean {
         AuthLogin authLogin = new AuthLogin(UUID.fromString(state), randomUUID(), user, client);
 
         this.authLoginDAO.persist(authLogin);
+        Response.ResponseBuilder rb = Response.ok();
+        if (client.getResponseType().equals(ResponseTypeEnum.CODE)){
+            rb = this.oidcTokenUtil.createUrlRedirectCodeResponse(authLogin,redirectUri);
+        }else{
+            rb = this.oidcTokenUtil.createTokenResponse(authLogin,redirectUri);
+        }
 
-        return Response.seeOther(client.urlRedirecionamento(redirectUri + authLogin.queryParam())).build();
+        return rb.build();
     }
 
 
@@ -232,27 +239,10 @@ public class OidcCoreEndPointBean {
             }
         }
 
-        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
-
-
-        jsonBuilder.add(SESSION_STATE, authLogin.getState().toString());
-        jsonBuilder.add(IDENTITY_TOKEN, oidcTokenUtil.createIdToken(authLogin,null));
-        jsonBuilder.add(ACCESS_TOKEN, oidcTokenUtil.createAccessToken(authLogin,null));
-        jsonBuilder.add(TOKEN_TYPE, OpenIdConstant.BEARER_TYPE);
-        jsonBuilder.add(EXPIRES_IN, OidcTokenUtil.expira);
-
-        //https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.3.1.3.3
-        CacheControl cc = new CacheControl();
-        cc.setNoCache(true);
-        cc.setNoStore(true);
-
         this.authLoginDAO.merge(authLogin);
 
-        return Response.ok()
-                .location(authLogin.getCliente().urlRedirecionamento(redirectUri))
-                .entity(jsonBuilder.build())
-                .cacheControl(cc)
-                .build();
+        return this.oidcTokenUtil.createResponse(authLogin,redirectUri).build();
     }
+
 }
 
