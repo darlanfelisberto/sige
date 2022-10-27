@@ -4,8 +4,8 @@ import {OidcService} from "../service/Oidc.service";
 import {Logger} from "../util/Logger";
 import {AuthGuardService} from "../guards/auth-guard.service";
 import {AuthService} from "../service/auth.service";
-
-
+import {HttpClientModule, HttpContextToken, HttpHeaders} from "@angular/common/http";
+import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
   declarations: [
@@ -19,6 +19,8 @@ import {AuthService} from "../service/auth.service";
     Logger
   ],
   imports: [
+    BrowserModule,
+    HttpClientModule
   ],
   exports: [
 

@@ -5,25 +5,30 @@ import {AuthService} from "../service/auth.service";
 import {CustomRoute} from "../util/CustomRoute";
 import {OidcService} from "../service/Oidc.service";
 import {Logger} from "../util/Logger";
+import {HttpClient, HttpHeaders, HttpRequest} from "@angular/common/http";
 
 @Injectable()
 export class AuthGuardService implements CanActivate{
   //oidc:OidcService = new OidcService(new Logger());
 
-  constructor(private  autService:AuthService,private router:Router) {
+  constructor(private  autService:AuthService,private router:Router,private http:HttpClient) {
 
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
     : Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
+      console.log(route.queryParams);
+
     if(this.autService.isAuthenticad()){
       return true;
     }else{
-       console.log((route.routeConfig as CustomRoute).perm);
-       this.autService.encaminhaLogin();
+      if(!this.autService.finalizaLogin(route.queryParams)){
+        console.log((route.routeConfig as CustomRoute).perm);
+        this.autService.encaminhaLogin(state.url);
+      }
     }
 
-    return this.autService.isAuthenticad();
+    return this.autService.hasPermissao((route.routeConfig as CustomRoute).perm);
   }
 }
