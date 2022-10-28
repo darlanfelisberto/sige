@@ -1,6 +1,8 @@
 import {Injectable, OnInit} from '@angular/core';
 import {OidcService} from "./Oidc.service";
-import * as Crypto from "crypto";
+import {Params} from "@angular/router";
+import {AccessTokenModel} from "../models/access-token.model";
+import {Logger} from "../util/Logger"; AccessTokenModel
 
 @Injectable()
 export class AuthService implements OnInit {
@@ -8,25 +10,32 @@ export class AuthService implements OnInit {
   private sessionType:string = "";
   private accessToken:string = "";
   private expireIn:number = 0;
+  private accessTokenModel:AccessTokenModel = new AccessTokenModel();
 
 
-  constructor(private oidc: OidcService) {
+  constructor(private oidc: OidcService,private log:Logger) {
   }
 
   isAuthenticad(): boolean {
-    return false;
+    return this.accessToken != "";
   }
 
   ngOnInit(): void {
     this.oidc.loagServerinfo();
   }
 
-  finalizaLogin(param: any):boolean{
+  finalizaLogin(param:Params):boolean{
     if(param['access_token']){
       this.accessToken = param['access_token'];
-      console.log(JSON.parse(atob( this.accessToken.split('.')[1])));
+      // console.log(JSON.parse(atob( this.accessToken.split('.')[1])));
+      this.expireIn = param['expire_in'];
+      this.sessionType = param['session_type'];
+      Object.assign(this.accessTokenModel,JSON.parse(atob( this.accessToken.split('.')[1])));
+      this.log.info("Usuário logado!");
+      return true;
+    }else {
+      return false;
     }
-    return true;
   }
 
   encaminhaLogin(path:string) :void {
@@ -45,9 +54,12 @@ export class AuthService implements OnInit {
     });
   }
 
-  hasPermissao(permissaoes:object) : boolean{
+  hasPermissao(permissaoes:string[]) : boolean{
+    return this.accessTokenModel.possuiPermissoes(permissaoes);
+  }
 
-    return true;
+  getAccessToken():string{
+    return this.accessToken;
   }
 
 }

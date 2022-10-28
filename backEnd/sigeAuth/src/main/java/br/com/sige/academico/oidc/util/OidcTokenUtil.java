@@ -51,6 +51,8 @@ public class OidcTokenUtil {
             jstClaimsBuilder.claim(NONCE, nonce);
         }
 
+        jstClaimsBuilder.claim(USER_PRINCIPAL_NAME, authLogin.getUsuario().getUsername()); //principal for microprofile jwt
+
         JWSSigner signer = null;
         SignedJWT signedJWT = null;
         try {
@@ -99,6 +101,7 @@ public class OidcTokenUtil {
 
         jstClaimsBuilder.claim(HeaderParameterNames.TYPE, BEARER_TYPE);
 
+        jstClaimsBuilder.claim(USER_PRINCIPAL_NAME, authLogin.getUsuario().getUsername()); //principal for microprofile jwt
         jstClaimsBuilder.claim(AUTHORIZED_PARTY, authLogin.getCliente().getNome());
         jstClaimsBuilder.claim(SCOPE, OPENID_SCOPE);
         jstClaimsBuilder.claim(SID, authLogin.getState());

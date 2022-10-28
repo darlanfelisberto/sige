@@ -5,5 +5,5 @@ import {AuthGuardService} from "../../../template-lib/src/guards/auth-guard.serv
 import {CustomRoute} from "../../../template-lib/src/util/CustomRoute";
 
 export const APP_ROUTES: CustomRoute[] = [
-  {path:'perfil',component:PerfilComponent,canActivate:[AuthGuardService],perm:['teste','teste']}
+  {path:'perfil',component:PerfilComponent,canActivate:[AuthGuardService],perm:['*']}
 ]

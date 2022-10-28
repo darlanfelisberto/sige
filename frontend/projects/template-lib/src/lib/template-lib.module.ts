@@ -13,7 +13,6 @@ import {BrowserModule} from "@angular/platform-browser";
   ],
   providers:[
     OidcService,
-    Logger,
     AuthGuardService,
     AuthService,
     Logger

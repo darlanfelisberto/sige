@@ -25,6 +25,10 @@ export class OidcService implements OnInit{
     this.loagServerinfo();
   }
 
+  parserAccessToken(accessToken:string){
+
+  }
+
   getAuthUrl():string{
     return this.oidcConfiguration['authorization_endpoint'];
   }

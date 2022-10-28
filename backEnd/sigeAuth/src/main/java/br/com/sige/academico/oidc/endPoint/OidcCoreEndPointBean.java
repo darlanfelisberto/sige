@@ -8,6 +8,8 @@ import static javax.ws.rs.core.MediaType.TEXT_HTML;
 import java.net.URISyntaxException;
 import java.util.UUID;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
@@ -56,6 +58,7 @@ public class OidcCoreEndPointBean {
     @GET
     @Path(WELL_KNOW_END_POINT_LINK)
     @Produces(APPLICATION_JSON)
+    @PermitAll
     public Response getConfiguration2(@PathParam("realm") String name) {
         return Response.ok(WELL_KNOW).header("Access-Control-Allow-Origin", "*").build();
     }
@@ -63,12 +66,23 @@ public class OidcCoreEndPointBean {
     @GET
     @Path(CERTS_END_POINT_LINK)
     @Produces(APPLICATION_JSON)
+    @PermitAll
     public Response getJwkFile() {
         return Response.ok(oidcKeysUtil.getPairKey().toJSONObject()).build();
     }
 
     @GET
+    @Path(USERINFO_ENDPOINT)
+//    @RolesAllowed({"*"})
+    @PermitAll
+    public String userInfoEndpoint(){
+        System.out.println("user end point");
+        return "use";
+    }
+
+    @GET
     @Path(AUTH_END_POINT_LINK)
+    @PermitAll
     public Response authEndpoint(
             @QueryParam(CLIENT_ID) String clientId, @QueryParam(SCOPE) String scope,
             @QueryParam(RESPONSE_TYPE) String responseType, @QueryParam(NONCE) String nonce,
@@ -109,12 +123,14 @@ public class OidcCoreEndPointBean {
 
     @GET
     @Path(LOGIN_AUTH_END_POINT_LINK)
+    @PermitAll
     public Response loginauth() {
         return Response.ok("<p> nada para mostrar</p>", TEXT_HTML).build();
     }
 
     @POST
     @Path(LOGIN_AUTH_END_POINT_LINK)
+    @PermitAll
     public Response loginAuth(@FormParam(CLIENT_ID) String clientId, @FormParam(SCOPE) String scope,
                               @FormParam(RESPONSE_TYPE) String responseType, @FormParam(NONCE) String nonce,
                               @FormParam(STATE) String state, @FormParam(REDIRECT_URI) String redirectUri,
@@ -207,6 +223,7 @@ public class OidcCoreEndPointBean {
     @POST
     @Path(TOKEN_END_POINT_LINK)
     @Produces(APPLICATION_JSON)
+    @PermitAll
     public Response tokenEndpointSigneddsadsad(
             @HeaderParam(AUTHORIZATION_HEADER) String authorizationHeader,
             @FormParam(CLIENT_ID) String clientId, @FormParam(CLIENT_SECRET) String clientSecret,

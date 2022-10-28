@@ -119,6 +119,7 @@ public interface OpenIdConstant {
 
     // profile scope claims
     String NAME = "name";
+    String USER_PRINCIPAL_NAME = "upn";
     String FAMILY_NAME = "family_name";
     String GIVEN_NAME = "given_name";
     String MIDDLE_NAME = "middle_name";

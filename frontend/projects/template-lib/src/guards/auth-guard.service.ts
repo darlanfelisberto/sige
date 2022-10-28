@@ -23,8 +23,9 @@ export class AuthGuardService implements CanActivate{
     if(this.autService.isAuthenticad()){
       return true;
     }else{
-      if(!this.autService.finalizaLogin(route.queryParams)){
-        console.log((route.routeConfig as CustomRoute).perm);
+      if(this.autService.finalizaLogin(route.queryParams)){
+        // this.router.navigate([state.url],{});
+      }else{
         this.autService.encaminhaLogin(state.url);
       }
     }
