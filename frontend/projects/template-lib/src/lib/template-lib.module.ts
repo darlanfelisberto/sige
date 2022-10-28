@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { TemplateLibComponent } from './template-lib.component';
 import {OidcService} from "../service/Oidc.service";
 import {Logger} from "../util/Logger";
 import {AuthGuardService} from "../guards/auth-guard.service";
 import {AuthService} from "../service/auth.service";
-import {HttpClientModule, HttpContextToken, HttpHeaders} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
@@ -12,17 +11,16 @@ import {BrowserModule} from "@angular/platform-browser";
 
   ],
   providers:[
+    Logger,
     OidcService,
     AuthGuardService,
-    AuthService,
-    Logger
+    AuthService
   ],
   imports: [
     BrowserModule,
     HttpClientModule
   ],
   exports: [
-
   ]
 })
 export class TemplateLibModule { }

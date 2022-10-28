@@ -60,7 +60,7 @@ public class OidcCoreEndPointBean {
     @Produces(APPLICATION_JSON)
     @PermitAll
     public Response getConfiguration2(@PathParam("realm") String name) {
-        return Response.ok(WELL_KNOW).header("Access-Control-Allow-Origin", "*").build();
+        return Response.ok("{teste:1}").build();
     }
 
     @GET
@@ -73,11 +73,11 @@ public class OidcCoreEndPointBean {
 
     @GET
     @Path(USERINFO_ENDPOINT)
-//    @RolesAllowed({"*"})
-    @PermitAll
-    public String userInfoEndpoint(){
+    @RolesAllowed({"user"})
+    @Produces(APPLICATION_JSON)
+    public Response userInfoEndpoint(){
         System.out.println("user end point");
-        return "use";
+        return Response.ok("{\"teste\":1}").build();
     }
 
     @GET

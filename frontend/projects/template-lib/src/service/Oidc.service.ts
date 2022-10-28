@@ -1,8 +1,10 @@
 import {Injectable, OnInit} from "@angular/core";
 import {Logger} from "../util/Logger";
 
-@Injectable()
-export class OidcService implements OnInit{
+@Injectable({
+  providedIn: 'root',
+})
+export class OidcService {
 
   public static OIDC_WELL_KNOWN:string = 'OIDC_WELL_KNOWN';
 
@@ -13,20 +15,23 @@ export class OidcService implements OnInit{
   oidcConfiguration:any = {};
 
   constructor(private log:Logger) {
-    this.loagServerinfo();
+    this.ngOnInit();
+  }
+
+  /**
+   * Em services o evento nao é chamado
+   */
+  ngOnInit(): void {
+    this.log.info("Call NG ON INIT OIDC_SERVICE")
     if(sessionStorage.getItem(OidcService.OIDC_WELL_KNOWN) ){
       this.log.info('Recuperando '+OidcService.OIDC_WELL_KNOWN);
       this.oidcConfiguration = JSON.parse(sessionStorage.getItem(OidcService.OIDC_WELL_KNOWN) as string);
+    }else {
+      this.loagServerinfo();
     }
   }
 
-  ngOnInit(): void {
-    console.log('teste')
-    this.loagServerinfo();
-  }
-
   parserAccessToken(accessToken:string){
-
   }
 
   getAuthUrl():string{
@@ -34,8 +39,8 @@ export class OidcService implements OnInit{
   }
 
   loagServerinfo() {
-
     this.log.info('Chamando oidc proviver well-know');
+
     var oidcProviderConfigUrl;
     if (this.oidcProvider.charAt(this.oidcProvider.length - 1) == '/') {
       oidcProviderConfigUrl = this.oidcProvider + '.well-known/openid-configuration';

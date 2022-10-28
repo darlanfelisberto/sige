@@ -59,11 +59,12 @@ public class Usuario extends  Model{
     }
 
     public String[] getArrayPermissoes(){
-        String[] array = new String[this.listPermissao.size()];
+        String[] array = new String[this.listPermissao.size()+1];
         int c = 0;
         for (Permissao p : this.listPermissao) {
             array[c++] = p.getNome();
         }
+        array[c] = "user";
         return array;
     }
 
