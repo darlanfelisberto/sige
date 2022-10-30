@@ -60,7 +60,7 @@ public class OidcCoreEndPointBean {
     @Produces(APPLICATION_JSON)
     @PermitAll
     public Response getConfiguration2(@PathParam("realm") String name) {
-        return Response.ok("{teste:1}").build();
+        return Response.ok(WELL_KNOW).build();
     }
 
     @GET
