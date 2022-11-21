@@ -43,7 +43,7 @@ public class OidcTokenUtil {
                         .notBeforeTime(now)
                         .issueTime(now)
                         .jwtID(randomUUID().toString())
-                        .claim(CODE, authLogin.getState())
+                        .claim(CODE, authLogin.getCode())
                         .claim(PREFERRED_USERNAME, authLogin.getUsuario().getUsername())
                         .claim(GROUPS, authLogin.getUsuario().getArrayPermissoes());
 
@@ -106,12 +106,12 @@ public class OidcTokenUtil {
         jstClaimsBuilder.claim(SCOPE, OPENID_SCOPE);
         jstClaimsBuilder.claim(SID, authLogin.getState());
         jstClaimsBuilder.claim(EMAIL_VERIFIED, false);
-        jstClaimsBuilder.claim(NAME, "darlan da silva");
+        jstClaimsBuilder.claim(NAME, authLogin.getUsuario().getUsername());
         jstClaimsBuilder.claim(PREFERRED_USERNAME, authLogin.getUsuario().getUsername());
         jstClaimsBuilder.claim(LOCALE, "pt-BR");
-        jstClaimsBuilder.claim(GIVEN_NAME, "darlan");
-        jstClaimsBuilder.claim(FAMILY_NAME, "da silva");
-        jstClaimsBuilder.claim(EMAIL, "darlan.felisberto@gmail.com");
+        jstClaimsBuilder.claim(GIVEN_NAME, authLogin.getUsuario().getNome());
+        jstClaimsBuilder.claim(FAMILY_NAME, authLogin.getUsuario().getNome());
+        jstClaimsBuilder.claim(EMAIL, authLogin.getUsuario().getEmail());
 
         JWSSigner signer = null;
         SignedJWT signedJWT = null;

@@ -20,6 +20,12 @@ public class Usuario extends  Model{
 
     private String salt;
 
+    @Transient
+    private String nome;
+
+    @Transient
+    private String email;
+
     @ManyToMany
     @JoinTable(
             name ="usuario_permissao",
@@ -74,5 +80,20 @@ public class Usuario extends  Model{
 
     public void setListPermissao(Set<Permissao> listPermissao) {
         this.listPermissao = listPermissao;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

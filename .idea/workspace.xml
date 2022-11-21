@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8832d23-b5f6-4253-b049-3e37f4c0ad42" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/sigeAuth/sigeAuth.iml" beforeDir="false" afterPath="$PROJECT_DIR$/backEnd/sigeAuth/sigeAuth.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/sigeAuth/src/main/java/br/com/sige/academico/oidc/endPoint/OidcCoreEndPointBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/backEnd/sigeAuth/src/main/java/br/com/sige/academico/oidc/endPoint/OidcCoreEndPointBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sige.iml" beforeDir="false" afterPath="$PROJECT_DIR$/sige.iml" afterDir="false" />
+    <list default="true" id="c8832d23-b5f6-4253-b049-3e37f4c0ad42" name="Changes" comment="correção link">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backEnd/sigeAuth/src/main/java/br/com/sige/academico/models/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/backEnd/sigeAuth/src/main/java/br/com/sige/academico/models/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backEnd/sigeAuth/src/main/java/br/com/sige/academico/oidc/util/OidcTokenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/backEnd/sigeAuth/src/main/java/br/com/sige/academico/oidc/util/OidcTokenUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +45,7 @@
     &quot;ts.external.directory.path&quot;: &quot;/opt/ambiente17/sige/frontend/node_modules/typescript/lib&quot;
   }
 }</component>
-  <component name="RunManager" selected="JavaScript Debug.Angular Application (frontend)">
+  <component name="RunManager" selected="Quarkus.sigeAuth">
     <configuration name="Angular Application (frontend)" type="JavascriptDebugType" uri="http://localhost:4200">
       <method v="2" />
     </configuration>
@@ -100,8 +101,19 @@
       <updated>1667076679735</updated>
       <workItem from="1667076681554" duration="646000" />
       <workItem from="1667077339053" duration="628000" />
-      <workItem from="1667153905451" duration="1338000" />
+      <workItem from="1667153905451" duration="3257000" />
+      <workItem from="1668893825493" duration="927000" />
+      <workItem from="1668942479798" duration="2279000" />
+      <workItem from="1669070720223" duration="697000" />
     </task>
+    <task id="LOCAL-00001" summary="correção link">
+      <created>1667156494070</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667156494070</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +123,17 @@
         <option value="$PROJECT_DIR$/frontend/dist/template-lib" />
       </list>
     </option>
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:org.jboss.resteasy:resteasy-core" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.enterprise:jakarta.enterprise.cdi-api" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.persistence:jakarta.persistence-api" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.validation:jakarta.validation-api" />
+    <option featureType="dependencySupport" implementationName="java:io.quarkus:quarkus-core" />
+    <option featureType="dependencySupport" implementationName="java:com.google.inject:guice" />
+    <option featureType="dependencySupport" implementationName="java:io.smallrye.reactive:mutiny" />
+    <option featureType="dependencySupport" implementationName="java:org.hibernate.validator:hibernate-validator" />
+    <option featureType="dependencySupport" implementationName="java:org.hibernate:hibernate-core" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -123,6 +146,10 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="correção link" />
+    <option name="LAST_COMMIT_MESSAGE" value="correção link" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -134,14 +161,37 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/projects/template-lib/src/service/Oidc.service.ts</url>
           <line>24</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/projects/template-lib/src/service/Oidc.service.ts</url>
           <line>59</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backEnd/sigeAuth/src/main/java/br/com/sige/academico/oidc/endPoint/OidcCoreEndPointBean.java</url>
+          <line>144</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backEnd/sigeAuth/src/main/java/br/com/sige/academico/oidc/util/OidcTokenUtil.java</url>
+          <line>182</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backEnd/sigeAuth/src/main/java/br/com/sige/academico/models/Cliente.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backEnd/sigeAuth/src/main/java/br/com/sige/academico/oidc/endPoint/OidcCoreEndPointBean.java</url>
+          <line>237</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backEnd/sigeAuth/src/main/java/br/com/sige/academico/oidc/util/OidcTokenUtil.java</url>
+          <line>146</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
