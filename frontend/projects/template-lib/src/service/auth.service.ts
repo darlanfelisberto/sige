@@ -39,14 +39,14 @@ export class AuthService implements OnInit {
   }
 
   encaminhaLogin(path: string): void {
-    window.location.href =(
-    //   this.log.info(
-        this.oidc.getAuthUrl() +
+    let url = this.oidc.getAuthUrl() +
       '?response_type=' + encodeURI("id_token token") +
       '&client_id=angular' +
       '&redirect_uri=http://localhost:4200' + path +
       '&state=' + this.broofa() +
-      '&scope=openid');
+      '&scope=openid';
+    this.log.info('url login: ' + url);
+    window.location.href = url;
   }
 
   broofa(): string {

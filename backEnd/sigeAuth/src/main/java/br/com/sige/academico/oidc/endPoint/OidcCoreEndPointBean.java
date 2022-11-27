@@ -107,12 +107,17 @@ public class OidcCoreEndPointBean {
     }
 
     public Response retornaLoginPage(String clientId,String scope,String state,String redirectUri,boolean msgErros){
+        CacheControl cc = new CacheControl();
+        cc.setNoCache(true);
+        cc.setNoStore(true);
         return Response.ok(formLogin.data("clientId", clientId)
                 .data("scope", scope)
                 .data("state", state)
                 .data("redirectUri", redirectUri)
                 .data("msgError",msgErros)
-                .render(), TEXT_HTML).build();
+                .render(), TEXT_HTML)
+                .cacheControl(cc)
+                .build();
     }
 
     public Response createJsonError(String tipo) {
