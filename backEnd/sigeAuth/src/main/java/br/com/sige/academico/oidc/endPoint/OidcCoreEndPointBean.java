@@ -155,7 +155,7 @@ public class OidcCoreEndPointBean {
         AuthLogin authLogin = new AuthLogin(UUID.fromString(state), randomUUID(), user, client);
 
         this.authLoginDAO.persist(authLogin);
-        Response.ResponseBuilder rb = Response.ok();
+        Response.ResponseBuilder rb;
         if (client.getResponseType().equals(ResponseTypeEnum.CODE)){
             rb = this.oidcTokenUtil.createUrlRedirectCodeResponse(authLogin,redirectUri);
         }else{
@@ -202,7 +202,6 @@ public class OidcCoreEndPointBean {
      * @return
      */
     @POST
-    @GET
     @Path(END_SESSION_ENDPOINT_LINK)
     public Response logoutEntPoint(@HeaderParam(AUTHORIZATION_HEADER) String authorizationHeader,
                                    @FormParam(REFRESH_TOKEN) String refresh){
@@ -267,4 +266,3 @@ public class OidcCoreEndPointBean {
     }
 
 }
-

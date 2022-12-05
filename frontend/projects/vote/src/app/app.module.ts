@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { PerfilComponent } from './comp/perfil/perfil.component';
 import {TemplateLibModule} from "../../../template-lib/src/lib/template-lib.module";
 import {TemplateLibComponent} from "../../../template-lib/src/lib/template-lib.component";
+import { KanbanComponent } from './comp/kanban/kanban.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PerfilComponent,
-    TemplateLibComponent
+    TemplateLibComponent,
+    KanbanComponent
   ],
   imports: [
     BrowserModule,

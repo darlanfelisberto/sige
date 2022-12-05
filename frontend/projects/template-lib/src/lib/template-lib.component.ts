@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
     <main class="main">
       <nav>
         <a routerLink="/perfil">perfil</a>
+        <a routerLink="/kanban">Kanban</a>
         <div> meio</div>
         <footer>
           footer
@@ -15,8 +16,8 @@ import { Component, OnInit } from '@angular/core';
       </nav>
       <div class="main flex-column">
         <section class="main">
-          tete
-          <ng-content></ng-content>
+          main
+          <ng-content  class="main"></ng-content>
         </section>
       </div>
     </main>

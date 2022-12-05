@@ -1,0 +1,11 @@
+<p>kanban works!</p>
+
+<div class="kanban" >
+
+  <div *ngFor="let col of colunas" class="kan-col">
+    <div (drop)="onDrop($event)" (dragover)="onDragover($event)">
+      <span>{{col}}</span>
+      <div (dragstart)="onDragStart($event)" draggable="true">Mover{{col}}</div>
+    </div>
+  </div>
+</div>
