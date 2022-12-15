@@ -21,7 +21,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="jdk" jdkName="17" jdkType="JavaSDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-hibernate-orm:2.13.3.Final" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-core:2.13.3.Final" level="project" />
@@ -145,7 +145,7 @@
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-netty:2.13.3.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.82.Final" level="project" />
     <orderEntry type="library" name="Maven: com.aayushatharva.brotli4j:brotli4j:1.8.0" level="project" />
-    <orderEntry type="library" name="Maven: com.aayushatharva.brotli4j:native-linux-x86_64:1.8.0" level="project" />
+    <orderEntry type="library" name="Maven: com.aayushatharva.brotli4j:native-windows-x86_64:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-codec-haproxy:4.1.82.Final" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-vertx-latebound-mdc-provider:2.13.3.Final" level="project" />
     <orderEntry type="library" name="Maven: io.smallrye.reactive:smallrye-mutiny-vertx-core:2.27.0" level="project" />
